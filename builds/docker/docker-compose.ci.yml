@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./builds/docker/Dockerfile.app-deploy-full
+      args:
+        APP_DOCKER_IMAGE: ${APP_DOCKER_IMAGE}
+        COMPOSER_AUTH: ${COMPOSER_AUTH}
+    image: ${APP_CI_DOCKER_IMAGE}:${APP_CI_DOCKER_VERSION}
+    environment:
+      - PHP_XDEBUG_ENABLED=true
+    command:
+      - "sleep"
+      - "7200"

@@ -1,0 +1,9 @@
+/storage/*.key
+/vendor
+/.idea
+/.vscode
+.phpunit.*
+.phplint.*
+.env
+.env.backup
+*.log

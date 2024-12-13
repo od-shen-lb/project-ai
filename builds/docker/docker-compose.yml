@@ -1,0 +1,43 @@
+services:
+  app:
+    image: ${APP_DOCKER_IMAGE}
+    environment:
+      - PHP_ERR_LOG_PATH=/dev/stdout
+      - PHP_DISPLAY_ERROR_ENABLED=true
+      - PHP_FILE_UPLOAD_ENABLED=true
+      - PHP_FILE_UPLOAD_MAX_SIZE=10
+      - COMPOSER_AUTH=${COMPOSER_AUTH}
+    networks:
+      - getoken
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_started
+  database:
+    image: mysql/mysql-server:8.0
+    volumes:
+      - database_data:/var/lib/mysql
+      - ./builds/docker/custom.sql:/docker-entrypoint-initdb.d/custom.sql:ro
+    command:
+      - --skip-name-resolve
+    networks:
+      - getoken
+    environment:
+      - TERM=xterm
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_DATABASE=laravel-project-ai
+      - MYSQL_USER=system-user
+      - MYSQL_PASSWORD=eitaij3OukohShi8Oozo7Edaij0ao7ci
+  redis:
+    image: redis:6-alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - getoken
+networks:
+  getoken:
+volumes:
+  database_data:
+  redis_data:
