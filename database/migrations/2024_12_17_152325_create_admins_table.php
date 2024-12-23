@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
-    const string TABLE_NAME = 'admins';
+    public const string TABLE_NAME = 'admins';
 
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->nullable()->default(null);
             $table->boolean('is_activated')->default(true);
             $table->rememberToken();
             $table->timestamps();

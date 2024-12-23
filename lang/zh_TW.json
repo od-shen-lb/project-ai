@@ -1,0 +1,14 @@
+{
+    "Reset Password Notification": "新密碼重置",
+    "Set Password Notification": "密碼設定",
+    "You are receiving this email because we received a password reset request for your account.": "您收到此信，因平台已接收您的帳號曾提出申請新密碼重置需求。",
+    "You are receiving this email because you registered a account in ": "您收到此信，因平台已接收您的帳號申請需求，需設定登入密碼。",
+    "This password set link will expire in :count minutes.": "上方按鈕連結將於 :count 分鐘過後失效。",
+    "This password reset link will expire in :count minutes.": "上方按鈕連結將於 :count 分鐘過後失效。",
+    "Reset Password": "重置密碼",
+    "Set Password": "設定密碼",
+    "Hello!": "您好！",
+    "Regards": "來自",
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:" : "如果點選上方:actionText按鈕失敗，請點選或複製下方連結於新的瀏覽器分頁:",
+    "If you did not request a password reset, no further action is required.": "如果您沒有需要重置新密碼，請忽略此信。"
+}

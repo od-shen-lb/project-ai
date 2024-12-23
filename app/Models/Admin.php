@@ -12,12 +12,12 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable implements FilamentUser
 {
-    protected $table = 'admins';
-
-    use HasRoles;
     use HasFactory;
+    use HasRoles;
     use Notifiable;
     use SoftDeletes;
+
+    protected $table = 'admins';
 
     protected $fillable = [
         'name',
@@ -37,6 +37,6 @@ class Admin extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole('系統管理員') || $this->is_activated;
+        return $this->is_activated;
     }
 }

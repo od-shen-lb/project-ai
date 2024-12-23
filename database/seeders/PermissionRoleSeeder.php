@@ -56,7 +56,6 @@ class PermissionRoleSeeder extends Seeder
         $permissionEditAdmin   = Permission::where('name', '編輯管理員')->first();
         $permissionDeleteAdmin = Permission::where('name', '刪除管理員')->first();
 
-
         // 系統管理員 permissions
         $roleAdmin->givePermissionTo($permissionViewAdmin);
         $roleAdmin->givePermissionTo($permissionCreateAdmin);

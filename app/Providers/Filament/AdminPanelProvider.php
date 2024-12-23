@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\RequestPasswordReset;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -18,6 +19,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
+use Jeffgreco13\FilamentBreezy\Livewire\PersonalInfo;
+use Jeffgreco13\FilamentBreezy\Livewire\UpdatePassword;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -34,9 +38,6 @@ class AdminPanelProvider extends PanelProvider
             ->defaultThemeMode(ThemeMode::Dark)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
@@ -56,9 +57,18 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->plugins([
+                BreezyCore::make()
+                    ->myProfile(shouldRegisterNavigation: false)
+                    ->myProfileComponents([
+                        'personal_info'   => PersonalInfo::class,
+                        'update_password' => UpdatePassword::class,
+                    ]),
+            ])
             ->sidebarWidth('17rem')
             ->brandName(config('app.name'))
             ->brandLogo(asset('/LeadBest.png'))
-            ->favicon(asset('/LeadBest.png'));
+            ->favicon(asset('/LeadBest.png'))
+            ->passwordReset(RequestPasswordReset::class);
     }
 }
