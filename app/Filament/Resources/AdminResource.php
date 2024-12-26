@@ -38,6 +38,7 @@ class AdminResource extends Resource
 
                 Select::make('roles')
                     ->label('角色')
+                    ->required()
                     ->relationship('roles', 'name')
                     ->saveRelationshipsWhenDisabled(true) // Enable saving relationships when disabled
                     ->preload(),
@@ -52,17 +53,18 @@ class AdminResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('name')->label('姓名'),
+                TextColumn::make('email'),
                 TextColumn::make('roles.name')->label('角色')->sortable(),
-                TextColumn::make('name')->label('姓名')->searchable(),
-                TextColumn::make('email')->searchable(),
+                TextColumn::make('created_at')->label('建立時間')->dateTime('Y/m/d H:i')->sortable(),
+                TextColumn::make('updated_at')->label('更新時間')->dateTime('Y/m/d H:i')->sortable(),
                 IconColumn::make('is_activated')->label('帳號啟用')->boolean()
                     ->trueIcon('heroicon-o-check-circle')
                     ->falseIcon('heroicon-o-x-circle'),
-                TextColumn::make('created_at')->label('建立時間')->dateTime('Y年m月d日')->sortable(),
             ])
+            ->defaultSort('updated_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\RestoreAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -86,7 +88,7 @@ class AdminResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->withoutGlobalScopes([
+        return parent::getEloquentQuery()->whereNull('deleted_at')->withoutGlobalScopes([
             SoftDeletingScope::class,
         ]);
     }

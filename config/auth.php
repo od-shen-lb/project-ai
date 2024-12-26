@@ -94,8 +94,8 @@ return [
         'admins' => [
             'provider' => 'admins',
             'table'    => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire'   => 1440,
-            'throttle' => 1440,
+            'expire'   => 1,
+            'throttle' => 1,
         ],
     ],
 

@@ -3,7 +3,7 @@
         background-color: white;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
-    
+
 </style>
 @props([
     'navigation',
@@ -16,120 +16,119 @@
 
 {{-- format-ignore-start --}}
 <aside
-    x-data="{}"
-    @if (filament()->isSidebarCollapsibleOnDesktop() && (! filament()->hasTopNavigation()))
-        x-cloak
+        x-data="{}"
+        @if (filament()->isSidebarCollapsibleOnDesktop() && (! filament()->hasTopNavigation()))
+            x-cloak
         x-bind:class="
             $store.sidebar.isOpen
                 ? @js($openSidebarClasses . ' ' . 'lg:sticky')
                 : '-translate-x-full rtl:translate-x-full lg:sticky lg:translate-x-0 rtl:lg:-translate-x-0'
         "
-    @else
-        @if (filament()->hasTopNavigation())
-            x-cloak
-            x-bind:class="$store.sidebar.isOpen ? @js($openSidebarClasses) : '-translate-x-full rtl:translate-x-full'"
+        @else
+            @if (filament()->hasTopNavigation())
+                x-cloak
+        x-bind:class="$store.sidebar.isOpen ? @js($openSidebarClasses) : '-translate-x-full rtl:translate-x-full'"
         @elseif (filament()->isSidebarFullyCollapsibleOnDesktop())
             x-cloak
-            x-bind:class="$store.sidebar.isOpen ? @js($openSidebarClasses . ' ' . 'lg:sticky') : '-translate-x-full rtl:translate-x-full'"
+        x-bind:class="$store.sidebar.isOpen ? @js($openSidebarClasses . ' ' . 'lg:sticky') : '-translate-x-full rtl:translate-x-full'"
         @else
             x-cloak="-lg"
-            x-bind:class="
+        x-bind:class="
                 $store.sidebar.isOpen
                     ? @js($openSidebarClasses . ' ' . 'lg:sticky')
                     : 'w-[--sidebar-width] -translate-x-full rtl:translate-x-full lg:sticky'
             "
         @endif
-    @endif
-    @class([
-        'fi-sidebar fixed inset-y-0 start-0 z-30 flex flex-col h-screen content-start bg-white transition-all dark:bg-gray-900 lg:z-0 lg:bg-transparent lg:shadow-sm lg:ring-0 lg:transition-none dark:lg:bg-transparent',
-        'lg:translate-x-0 rtl:lg:-translate-x-0' => ! (filament()->isSidebarCollapsibleOnDesktop() || filament()->isSidebarFullyCollapsibleOnDesktop() || filament()->hasTopNavigation()),
-        'lg:-translate-x-full rtl:lg:translate-x-full' => filament()->hasTopNavigation(),
-    ])
+        @endif
+        @class([
+            'fi-sidebar fixed inset-y-0 start-0 z-30 flex flex-col h-screen content-start bg-white transition-all dark:bg-gray-900 lg:z-0 lg:bg-transparent lg:shadow-sm lg:ring-0 lg:transition-none dark:lg:bg-transparent',
+            'lg:translate-x-0 rtl:lg:-translate-x-0' => ! (filament()->isSidebarCollapsibleOnDesktop() || filament()->isSidebarFullyCollapsibleOnDesktop() || filament()->hasTopNavigation()),
+            'lg:-translate-x-full rtl:lg:translate-x-full' => filament()->hasTopNavigation(),
+        ])
 >
     <div class="overflow-x-clip">
-        <header
-            class="fi-sidebar-header flex h-16 items-center bg-white px-6 ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 lg:shadow-sm"
-        >
+        <header class="fi-sidebar-header flex h-16 items-center bg-white px-6 ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 lg:shadow-sm">
             <div
-                @if (filament()->isSidebarCollapsibleOnDesktop())
-                    x-show="$store.sidebar.isOpen"
+                    @if (filament()->isSidebarCollapsibleOnDesktop())
+                        x-show="$store.sidebar.isOpen"
                     x-transition:enter="lg:transition lg:delay-100"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
-                @endif
+                    @endif
             >
                 @if ($homeUrl = filament()->getHomeUrl())
                     <a {{ \Filament\Support\generate_href_html($homeUrl) }} class="flex items-center">
-                    <b>{{ __('filament-panels::components/sidebar/index.name') }}</b>
+                        <img src="{{ asset('/LeadBest.png') }}" alt="Logo" class="h-10">
+                        <b>{{ __('filament-panels::components/sidebar/index.name') }}</b>
                     </a>
                 @else
-                    <x-filament-panels::logo />
+                    <x-filament-panels::logo/>
                 @endif
             </div>
 
             @if (filament()->isSidebarCollapsibleOnDesktop())
                 <x-filament::icon-button
-                    color="gray"
-                    :icon="$isRtl ? 'heroicon-o-chevron-left' : 'heroicon-o-chevron-right'"
-                    {{-- @deprecated Use `panels::sidebar.expand-button.rtl` instead of `panels::sidebar.expand-button` for RTL. --}}
-                    :icon-alias="$isRtl ? ['panels::sidebar.expand-button.rtl', 'panels::sidebar.expand-button'] : 'panels::sidebar.expand-button'"
-                    icon-size="lg"
-                    :label="__('filament-panels::layout.actions.sidebar.expand.label')"
-                    x-cloak
-                    x-data="{}"
-                    x-on:click="$store.sidebar.open()"
-                    x-show="! $store.sidebar.isOpen"
-                    class="mx-auto"
+                        color="gray"
+                        :icon="$isRtl ? 'heroicon-o-chevron-left' : 'heroicon-o-chevron-right'"
+                        {{-- @deprecated Use `panels::sidebar.expand-button.rtl` instead of `panels::sidebar.expand-button` for RTL. --}}
+                        :icon-alias="$isRtl ? ['panels::sidebar.expand-button.rtl', 'panels::sidebar.expand-button'] : 'panels::sidebar.expand-button'"
+                        icon-size="lg"
+                        :label="__('filament-panels::layout.actions.sidebar.expand.label')"
+                        x-cloak
+                        x-data="{}"
+                        x-on:click="$store.sidebar.open()"
+                        x-show="! $store.sidebar.isOpen"
+                        class="mx-auto"
                 />
             @endif
 
             @if (filament()->isSidebarCollapsibleOnDesktop() || filament()->isSidebarFullyCollapsibleOnDesktop())
                 <x-filament::icon-button
-                    color="gray"
-                    :icon="$isRtl ? 'heroicon-o-chevron-right' : 'heroicon-o-chevron-left'"
-                    {{-- @deprecated Use `panels::sidebar.collapse-button.rtl` instead of `panels::sidebar.collapse-button` for RTL. --}}
-                    :icon-alias="$isRtl ? ['panels::sidebar.collapse-button.rtl', 'panels::sidebar.collapse-button'] : 'panels::sidebar.collapse-button'"
-                    icon-size="lg"
-                    :label="__('filament-panels::layout.actions.sidebar.collapse.label')"
-                    x-cloak
-                    x-data="{}"
-                    x-on:click="$store.sidebar.close()"
-                    x-show="$store.sidebar.isOpen"
-                    class="ms-auto hidden lg:flex"
+                        color="gray"
+                        :icon="$isRtl ? 'heroicon-o-chevron-right' : 'heroicon-o-chevron-left'"
+                        {{-- @deprecated Use `panels::sidebar.collapse-button.rtl` instead of `panels::sidebar.collapse-button` for RTL. --}}
+                        :icon-alias="$isRtl ? ['panels::sidebar.collapse-button.rtl', 'panels::sidebar.collapse-button'] : 'panels::sidebar.collapse-button'"
+                        icon-size="lg"
+                        :label="__('filament-panels::layout.actions.sidebar.collapse.label')"
+                        x-cloak
+                        x-data="{}"
+                        x-on:click="$store.sidebar.close()"
+                        x-show="$store.sidebar.isOpen"
+                        class="ms-auto hidden lg:flex"
                 />
             @endif
         </header>
     </div>
 
     <nav
-        class="fi-sidebar-nav flex-grow flex flex-col gap-y-7 overflow-y-auto overflow-x-hidden px-6 py-8"
-        style="scrollbar-gutter: stable"
+            class="fi-sidebar-nav flex-grow flex flex-col gap-y-7 overflow-y-auto overflow-x-hidden px-6 py-8"
+            style="scrollbar-gutter: stable"
     >
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_NAV_START) }}
 
         @if (filament()->hasTenancy() && filament()->hasTenantMenu())
             <div
-                @class([
-                    'fi-sidebar-nav-tenant-menu-ctn',
-                    '-mx-2' => ! filament()->isSidebarCollapsibleOnDesktop(),
-                ])
-                @if (filament()->isSidebarCollapsibleOnDesktop())
-                    x-bind:class="$store.sidebar.isOpen ? '-mx-2' : '-mx-4'"
-                @endif
+                    @class([
+                        'fi-sidebar-nav-tenant-menu-ctn',
+                        '-mx-2' => ! filament()->isSidebarCollapsibleOnDesktop(),
+                    ])
+                    @if (filament()->isSidebarCollapsibleOnDesktop())
+                        x-bind:class="$store.sidebar.isOpen ? '-mx-2' : '-mx-4'"
+                    @endif
             >
-                <x-filament-panels::tenant-menu />
+                <x-filament-panels::tenant-menu/>
             </div>
         @endif
 
         <ul class="fi-sidebar-nav-groups -mx-2 flex flex-col gap-y-7">
             @foreach ($navigation as $group)
                 <x-filament-panels::sidebar.group
-                    :active="$group->isActive()"
-                    :collapsible="$group->isCollapsible()"
-                    :icon="$group->getIcon()"
-                    :items="$group->getItems()"
-                    :label="$group->getLabel()"
-                    :attributes="\Filament\Support\prepare_inherited_attributes($group->getExtraSidebarAttributeBag())"
+                        :active="$group->isActive()"
+                        :collapsible="$group->isCollapsible()"
+                        :icon="$group->getIcon()"
+                        :items="$group->getItems()"
+                        :label="$group->getLabel()"
+                        :attributes="\Filament\Support\prepare_inherited_attributes($group->getExtraSidebarAttributeBag())"
                 />
             @endforeach
         </ul>
