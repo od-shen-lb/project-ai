@@ -10,5 +10,7 @@
     "Hello!": "您好！",
     "Regards": "來自",
     "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:" : "如果點選上方:actionText按鈕失敗，請點選或複製下方連結於新的瀏覽器分頁:",
-    "If you did not request a password reset, no further action is required.": "如果您沒有需要重置新密碼，請忽略此信。"
+    "If you did not request a password reset, no further action is required.": "如果您沒有需要重置新密碼，請忽略此信。",
+    "Admin Model": "管理員",
+    "Agent Model": "Agent"
 }

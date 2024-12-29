@@ -22,10 +22,9 @@ class AdminSeeder extends Seeder
 
             foreach ($admins as $admin) {
                 $createdUser = Admin::create([
-                    'name'         => $admin['name'],
-                    'email'        => $admin['email'],
-                    'password'     => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-                    'is_activated' => true,
+                    'name'     => $admin['name'],
+                    'email'    => $admin['email'],
+                    'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 ]);
 
                 $createdUser->assignRole($roleAdmin);

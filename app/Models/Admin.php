@@ -23,7 +23,6 @@ class Admin extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
-        'is_activated',
     ];
 
     protected $hidden = [
@@ -31,12 +30,8 @@ class Admin extends Authenticatable implements FilamentUser
         'remember_token',
     ];
 
-    protected $casts = [
-        'is_activated' => 'boolean',
-    ];
-
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_activated;
+        return true;
     }
 }

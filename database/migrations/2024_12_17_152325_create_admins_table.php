@@ -17,7 +17,6 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password')->nullable()->default(null);
-            $table->boolean('is_activated')->default(true);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

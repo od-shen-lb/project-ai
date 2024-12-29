@@ -17,9 +17,6 @@ it('admin can create all kinds of admins', function (
     $this->get(AdminResource::getUrl('create'))->assertSuccessful();
 
     livewire(CreateAdmin::class)
-        ->assertFormSet([
-            'is_activated' => true,
-        ])
         ->fillForm([
             'name'     => $name,
             'email'    => $email,

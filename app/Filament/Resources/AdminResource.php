@@ -16,6 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Lang;
 
 class AdminResource extends Resource
 {
@@ -42,10 +43,6 @@ class AdminResource extends Resource
                     ->relationship('roles', 'name')
                     ->saveRelationshipsWhenDisabled(true) // Enable saving relationships when disabled
                     ->preload(),
-
-                Toggle::make('is_activated')
-                    ->label('帳號啟用')
-                    ->default(true),
             ]);
     }
 
@@ -58,13 +55,11 @@ class AdminResource extends Resource
                 TextColumn::make('roles.name')->label('角色')->sortable(),
                 TextColumn::make('created_at')->label('建立時間')->dateTime('Y/m/d H:i')->sortable(),
                 TextColumn::make('updated_at')->label('更新時間')->dateTime('Y/m/d H:i')->sortable(),
-                IconColumn::make('is_activated')->label('帳號啟用')->boolean()
-                    ->trueIcon('heroicon-o-check-circle')
-                    ->falseIcon('heroicon-o-x-circle'),
             ])
             ->defaultSort('updated_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\RestoreAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -86,9 +81,14 @@ class AdminResource extends Resource
         ];
     }
 
+    public static function getModelLabel(): string
+    {
+        return Lang::get('Admin Model');
+    }
+
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->whereNull('deleted_at')->withoutGlobalScopes([
+        return parent::getEloquentQuery()->withoutGlobalScopes([
             SoftDeletingScope::class,
         ]);
     }
