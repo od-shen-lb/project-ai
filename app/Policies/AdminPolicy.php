@@ -11,7 +11,7 @@ class AdminPolicy
         return $admin->hasRole('系統管理員');
     }
 
-    public function view(Admin $admin, Admin $model): bool
+    public function view(Admin $admin): bool
     {
         return $admin->hasRole('系統管理員');
     }

@@ -13,7 +13,7 @@ return [
         ],
 
         'password'              => [
-            'label'                => '密碼',
+            'label'                => '密碼（請填寫八碼英數字以上）',
             'validation_attribute' => '密碼',
         ],
 

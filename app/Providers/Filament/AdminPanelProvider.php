@@ -69,6 +69,9 @@ class AdminPanelProvider extends PanelProvider
             ->brandName(config('app.name'))
             ->brandLogo(asset('/LeadBest.png'))
             ->favicon(asset('/LeadBest.png'))
+            ->resources([
+                config('filament-logger.activity_resource'),
+            ])
             ->passwordReset(RequestPasswordReset::class);
     }
 }
