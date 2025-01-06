@@ -8,7 +8,7 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListAdmins extends ListRecords
 {
-    protected static ?string $title = '管理員管理';
+    protected static ?string $title = '管理員清單';
 
     protected static ?string $breadcrumb = '管理員清單';
 

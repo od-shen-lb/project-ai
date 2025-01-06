@@ -4,14 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AdminResource\Pages;
 use App\Models\Admin;
-use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -34,11 +31,11 @@ class AdminResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->label('姓名')->required()->maxLength(255),
+                TextInput::make('name')->label(Lang::get('admin.column.name'))->required()->maxLength(255),
                 TextInput::make('email')->email()->required()->maxLength(255)->unique(ignoreRecord: true),
 
                 Select::make('roles')
-                    ->label('角色')
+                    ->label(Lang::get('admin.column.role'))
                     ->required()
                     ->relationship('roles', 'name')
                     ->saveRelationshipsWhenDisabled(true) // Enable saving relationships when disabled
@@ -50,11 +47,11 @@ class AdminResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('姓名'),
+                TextColumn::make('name')->label(Lang::get('admin.column.name')),
                 TextColumn::make('email'),
-                TextColumn::make('roles.name')->label('角色')->sortable(),
-                TextColumn::make('created_at')->label('建立時間')->dateTime('Y/m/d H:i')->sortable(),
-                TextColumn::make('updated_at')->label('更新時間')->dateTime('Y/m/d H:i')->sortable(),
+                TextColumn::make('roles.name')->label(Lang::get('admin.column.role'))->sortable(),
+                TextColumn::make('created_at')->label(Lang::get('column.created_at'))->dateTime('Y/m/d H:i')->sortable(),
+                TextColumn::make('updated_at')->label(Lang::get('column.updated_at'))->dateTime('Y/m/d H:i')->sortable(),
             ])
             ->defaultSort('updated_at', 'desc')
             ->actions([
@@ -83,7 +80,7 @@ class AdminResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return Lang::get('Admin Model');
+        return Lang::get('admin.model.label');
     }
 
     public static function getEloquentQuery(): Builder

@@ -9,9 +9,9 @@ class EditAdmin extends EditRecord
 {
     protected static string $resource = AdminResource::class;
 
-    protected static ?string $title = '編輯既有管理員';
+    protected static ?string $title = '編輯管理員';
 
-    protected static ?string $breadcrumb = '編輯既有管理員';
+    protected static ?string $breadcrumb = '編輯管理員';
 
     protected function getActions(): array
     {

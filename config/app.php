@@ -2,6 +2,12 @@
 
 return [
 
+    'agent_upload_files_limit' => env('AGENT_UPLOAD_FILES_LIMIT', 10),
+    'agent_upper_limit' => env('AGENT_UPPER_LIMIT', 3),
+    'message_upper_limit' => env('MESSAGE_UPPER_LIMIT', 1000),
+    'knowledge_upper_limit' => env('KNOWLEDGE_UPPER_LIMIT', 50),
+    'purchased_plan_name' => env('PURCHASED_PLAN_NAME', '基礎方案'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
